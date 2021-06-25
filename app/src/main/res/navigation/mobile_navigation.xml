@@ -6,17 +6,17 @@
     app:startDestination="@id/busyWorksFragment">
     <fragment
         android:id="@+id/busyWorksFragment"
-        android:name="com.example.simpletodolist.ui.dashboard.BusyWorksFragment"
+        android:name="com.example.simpletodolist.fragment.BusyWorksFragment"
         android:label="fragment_busyworks"
         tools:layout="@layout/fragment_busyworks" />
     <fragment
         android:id="@+id/freeWorksFragment"
-        android:name="com.example.simpletodolist.ui.home.FreeWorksFragment"
+        android:name="com.example.simpletodolist.fragment.FreeWorksFragment"
         android:label="fragment_freeworks"
         tools:layout="@layout/fragment_freeworks" />
     <fragment
         android:id="@+id/wishWorksFragment"
-        android:name="com.example.simpletodolist.ui.notifications.WishWorksFragment"
+        android:name="com.example.simpletodolist.fragment.WishWorksFragment"
         android:label="fragment_wishworks"
         tools:layout="@layout/fragment_wishworks" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.simpletodolist.ui.dashboard
+package com.example.simpletodolist.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,13 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.simpletodolist.R
-import com.example.simpletodolist.databinding.FragmentBusyworksBinding
+import com.example.simpletodolist.databinding.FragmentFreeworksBinding
 
+class FreeWorksFragment : Fragment() {
 
-class BusyWorksFragment : Fragment() {
-
-
-    private lateinit var binding : FragmentBusyworksBinding
+    private lateinit var binding : FragmentFreeworksBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,10 +21,10 @@ class BusyWorksFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        binding = FragmentBusyworksBinding.inflate(layoutInflater)
+
+        binding = FragmentFreeworksBinding.inflate(layoutInflater)
 
         return binding.root
     }
-
 
 }

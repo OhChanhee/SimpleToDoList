@@ -1,4 +1,4 @@
-package com.example.simpletodolist.ui.notifications
+package com.example.simpletodolist.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,22 +9,24 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.simpletodolist.R
-import com.example.simpletodolist.databinding.FragmentWishworksBinding
+import com.example.simpletodolist.databinding.FragmentBusyworksBinding
 
-class WishWorksFragment : Fragment() {
 
-    private lateinit var binding : FragmentWishworksBinding
+class BusyWorksFragment : Fragment() {
+
+
+    private lateinit var binding : FragmentBusyworksBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?):
-            View {
+        savedInstanceState: Bundle?
+    ): View {
 
-        binding = FragmentWishworksBinding.inflate(layoutInflater)
-
+        binding = FragmentBusyworksBinding.inflate(layoutInflater)
 
         return binding.root
     }
+
 
 }
