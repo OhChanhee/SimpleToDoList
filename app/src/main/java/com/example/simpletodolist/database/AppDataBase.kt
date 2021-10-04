@@ -1,4 +1,4 @@
-package com.example.simpletodolist
+package com.example.simpletodolist.database
 
 import android.content.Context
 import androidx.room.Database
@@ -12,7 +12,7 @@ abstract class AppDataBase : RoomDatabase(){
     companion object {
         private var instance : AppDataBase? = null
 
-        fun getInstance(context: Context):AppDataBase?{
+        fun getInstance(context: Context): AppDataBase?{
             if(instance == null)
             {
                 synchronized(AppDataBase::class)

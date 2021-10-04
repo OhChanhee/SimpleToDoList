@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@drawable/item_layout">
 
 
         <LinearLayout
@@ -20,7 +21,8 @@
                     android:id="@+id/title_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="20dp"
+                    android:padding="10dp"
+                    android:textAlignment="center"
                     android:text="제목입니다"
                     android:textSize="20dp" />
 
@@ -38,7 +40,7 @@
         <CheckBox
             android:id="@+id/end_checkbox"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             tools:layout_editor_absoluteX="0dp"
