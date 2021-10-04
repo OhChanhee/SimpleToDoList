@@ -3,4 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="tv_title">Title</string>
+    <string name="tv_content">Content</string>
+    <string name="bt_add">ADD</string>
+    <string name="bt_delete">DELETE</string>
 </resources>
