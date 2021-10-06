@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var curCategory: String
-    private val tabTitleList = arrayOf("BusyWorks","FreeWorks","WishWorks")
+    private val tabTitleList = arrayOf("BusyWorks", "FreeWorks", "WishWorks")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -42,32 +42,32 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        TabLayoutMediator(binding.tabLayout,binding.viewPager){ tab,position ->
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = tabTitleList[position]
         }.attach()
 
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_action_bar,menu)
+        menuInflater.inflate(R.menu.main_action_bar, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.app_bar_additem)
-        {
+        if (item.itemId == R.id.app_bar_additem) {
             openAddItemActivity()
         }
 
         return super.onOptionsItemSelected(item)
     }
 
-    private fun openAddItemActivity(){
-        val addIntent = Intent(this,AddActivity::class.java)
-        addIntent.putExtra("category",getCurCategory())
+    private fun openAddItemActivity() {
+        val addIntent = Intent(this, AddActivity::class.java)
+        addIntent.putExtra("category", getCurCategory())
         startActivity(addIntent)
     }
-    fun getCurCategory() : String{
+
+    fun getCurCategory(): String {
         return curCategory
     }
 }

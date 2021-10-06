@@ -1,6 +1,5 @@
 package com.example.simpletodolist
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -30,7 +29,7 @@ class AddActivity : AppCompatActivity() {
                     isEnd = false
                 )
                 AppDataBase.getInstance(this@AddActivity)!!.memoItemDao().insertItem(item)
-                openMainActivity()
+                finishActivity()
             }
         }
 
@@ -44,12 +43,12 @@ class AddActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.app_bar_back) {
-            openMainActivity()
+            finishActivity()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun openMainActivity() {
-        startActivity(Intent(this, MainActivity::class.java))
+    private fun finishActivity() {
+        finish()
     }
 }

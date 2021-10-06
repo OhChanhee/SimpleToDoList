@@ -34,6 +34,12 @@ class FreeWorksFragment : Fragment() {
 
         return binding.root
     }
+
+    override fun onResume() {
+        super.onResume()
+        readDB()
+    }
+
     private fun readDB() {
         CoroutineScope(Dispatchers.IO).launch {
             val item = AppDataBase.getInstance(requireContext())!!.memoItemDao().getFreeWorksMemo()
