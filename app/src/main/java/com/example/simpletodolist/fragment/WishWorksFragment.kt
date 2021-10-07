@@ -48,9 +48,7 @@ class WishWorksFragment : Fragment() {
 
                 wishWorksAdapter.notifyDataSetChanged()
             }
-
         }
-
     }
 
 }
