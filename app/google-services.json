@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "932498822930",
+    "project_id": "treefarmdiary",
+    "storage_bucket": "treefarmdiary.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:932498822930:android:e5e37334ba67333074c5cb",
+        "android_client_info": {
+          "package_name": "com.example.simpletodolist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "932498822930-hgd205teu6t3u1ds7is47nj75itm4p1o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.simpletodolist",
+            "certificate_hash": "a2180471cf50fcc46e2ea16cc68a260f060af524"
+          }
+        },
+        {
+          "client_id": "932498822930-ttabeolcu67rmp3rh54o27e873gg0ipf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdyfB5jqSOjbi1cRzCtNyzhHvMRNfATE0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "932498822930-ttabeolcu67rmp3rh54o27e873gg0ipf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
