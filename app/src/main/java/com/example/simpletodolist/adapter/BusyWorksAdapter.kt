@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.simpletodolist.ItemActivity
+import com.example.simpletodolist.view.ReadDiaryActivity
 import com.example.simpletodolist.R
 import com.example.simpletodolist.database.MemoItem
 
@@ -42,7 +42,7 @@ class BusyWorksAdapter(private val context: Context, private var data: List<Memo
             checkbox.isChecked = items[position].isEnd
 
             itemView.setOnClickListener {
-                Intent(context, ItemActivity::class.java).apply {
+                Intent(context, ReadDiaryActivity::class.java).apply {
                     putExtra("item", items[position])
                 }.run { context.startActivity(this) }
             }
