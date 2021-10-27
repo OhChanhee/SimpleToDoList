@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SimpleToDoList">
+        <activity android:name=".view.SettingActivity"></activity>
         <activity android:name=".view.ReadDiaryActivity" />
         <activity
             android:name=".view.TreeActivity"

@@ -6,7 +6,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.simpletodolist.R
 import com.example.simpletodolist.database.AppDataBase
-import com.example.simpletodolist.database.MemoItem
+import com.example.simpletodolist.database.DiaryItem
 import com.example.simpletodolist.databinding.ActivityItemaddBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +22,7 @@ class AddActivity : AppCompatActivity() {
         binding.buttonAdd.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
 
-                val item = MemoItem(
+                val item = DiaryItem(
                     category = intent.getStringExtra("category").toString(),
                     title = binding.editTextTitle.text.toString(),
                     content = binding.editTextContent.text.toString(),

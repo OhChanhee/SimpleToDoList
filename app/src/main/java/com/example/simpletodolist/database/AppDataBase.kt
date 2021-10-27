@@ -5,9 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [MemoItem::class],version = 1)
+@Database(entities = [DiaryItem::class],version = 1)
 abstract class AppDataBase : RoomDatabase(){
-    abstract fun memoItemDao(): MemoItemDao
+    abstract fun DiaryItemDao(): DiaryItemDao
 
     companion object {
         private var instance : AppDataBase? = null
@@ -19,7 +19,7 @@ abstract class AppDataBase : RoomDatabase(){
                 {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
-                        AppDataBase::class.java, "memoitem.db"
+                        AppDataBase::class.java, "diaryItem.db"
                     ).build()
                 }
             }

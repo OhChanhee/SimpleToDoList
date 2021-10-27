@@ -6,7 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.example.simpletodolist.R
 import com.example.simpletodolist.database.AppDataBase
-import com.example.simpletodolist.database.MemoItem
+import com.example.simpletodolist.database.DiaryItem
 import com.example.simpletodolist.databinding.ActivityItemBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,13 +19,13 @@ class ReadDiaryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityItemBinding.inflate(layoutInflater)
 
-        val item = intent.getParcelableExtra<MemoItem>("item")
+        val item = intent.getParcelableExtra<DiaryItem>("item")
         binding.editTextTitle.setText(item?.title)
         binding.editTextContent.setText(item?.content)
 
         binding.buttonSave.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                val fixeditem = MemoItem(
+                val fixeditem = DiaryItem(
                     id = item!!.id,
                     category = item!!.category,
                     title = binding.editTextTitle.text.toString(),
