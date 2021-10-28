@@ -8,6 +8,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/spring_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/year_text"
             android:layout_width="wrap_content"
@@ -33,59 +42,46 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/year_text" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_imageView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/tree_btn"
             android:layout_width="32dp"
             android:layout_height="32dp"
+            android:layout_marginLeft="44dp"
             android:layout_marginRight="88dp"
+            android:layout_marginBottom="12dp"
             android:background="@drawable/ic_icon_tree_linear"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/write_btn"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/bottom_imageView" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/write_btn"
             android:layout_width="32dp"
             android:layout_height="32dp"
+            android:layout_marginBottom="12dp"
             android:background="@drawable/ic_icon_write_linear"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/setting_btn"
-            app:layout_constraintStart_toEndOf="@+id/tree_btn"
-            app:layout_constraintTop_toTopOf="@+id/bottom_imageView" />
+            app:layout_constraintStart_toEndOf="@+id/tree_btn" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/setting_btn"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginLeft="88dp"
+            android:layout_marginRight="44dp"
+            android:layout_marginBottom="12dp"
             android:background="@drawable/ic_icon_setting_linear"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/bottom_imageView"
-            app:layout_constraintStart_toEndOf="@+id/write_btn"
-            app:layout_constraintTop_toTopOf="@+id/bottom_imageView" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/bottom_imageView"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="#58CB86"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/write_btn" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_imageView"
+            android:layout_height="0dp"
+            android:layout_marginTop="14dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/month_text" />

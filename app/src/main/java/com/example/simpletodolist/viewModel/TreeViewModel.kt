@@ -8,6 +8,8 @@ import com.example.simpletodolist.database.DiaryItem
 
 class TreeViewModel : ViewModel() {
 
+    var year : Int = 0
+    var month : Int = 0
 
     private val diaryData : MutableLiveData<List<DiaryItem>> by lazy {
         MutableLiveData<List<DiaryItem>>().also {
