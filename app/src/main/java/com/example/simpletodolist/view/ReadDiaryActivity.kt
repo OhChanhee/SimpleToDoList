@@ -7,17 +7,17 @@ import android.view.MenuItem
 import com.example.simpletodolist.R
 import com.example.simpletodolist.database.AppDataBase
 import com.example.simpletodolist.database.DiaryItem
-import com.example.simpletodolist.databinding.ActivityItemBinding
+import com.example.simpletodolist.databinding.ActivityReadDiaryBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
 class ReadDiaryActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityItemBinding
+    private lateinit var binding: ActivityReadDiaryBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityItemBinding.inflate(layoutInflater)
+        binding = ActivityReadDiaryBinding.inflate(layoutInflater)
 
         val item = intent.getParcelableExtra<DiaryItem>("item")
         binding.editTextTitle.setText(item?.title)
@@ -27,20 +27,19 @@ class ReadDiaryActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.IO).launch {
                 val fixeditem = DiaryItem(
                     id = item!!.id,
-                    category = item!!.category,
+                    treeCategoryId = 0,
                     title = binding.editTextTitle.text.toString(),
                     content = binding.editTextContent.text.toString(),
                     time = LocalDate.now().toString(),
-                    isEnd = item!!.isEnd
                 )
 
-                AppDataBase.getInstance(this@ReadDiaryActivity)!!.memoItemDao().updateItem(fixeditem)
+                AppDataBase.getInstance(this@ReadDiaryActivity)!!.DiaryItemDao().updateItem(fixeditem)
                 finishActivity()
             }
         }
         binding.buttonDelete.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                AppDataBase.getInstance(this@ReadDiaryActivity)!!.memoItemDao().deleteItem(item!!)
+                AppDataBase.getInstance(this@ReadDiaryActivity)!!.DiaryItemDao().deleteItem(item!!)
                 finishActivity()
             }
         }

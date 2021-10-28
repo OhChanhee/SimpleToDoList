@@ -8,8 +8,9 @@ import kotlinx.parcelize.Parcelize
 @Entity(tableName = "tb_diaryItem")
 data class DiaryItem(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val title:String,
-    val content:String,
-    val time:String,
+    var treeCategoryId:Int,
+    var title:String,
+    var content:String,
+    var time:String,
 ):Parcelable
 

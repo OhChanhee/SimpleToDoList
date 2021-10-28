@@ -8,8 +8,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @Entity(tableName = "tb_tree")
 data class Tree(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val year: Int,
-    val month:Int,
-    val diaryItemList:List<DiaryItem>
+    @PrimaryKey(autoGenerate = true) val treeId: Int = 0,
+    var year: Int,
+    var month:Int,
 ): Parcelable

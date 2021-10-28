@@ -35,7 +35,7 @@ class BusyWorksFragment : Fragment() {
 
     private fun readDB() {
         CoroutineScope(Dispatchers.IO).launch {
-            val item = AppDataBase.getInstance(requireContext())!!.memoItemDao().getBusyWorksMemo()
+            val item = AppDataBase.getInstance(requireContext())!!.DiaryItemDao().getBusyWorksMemo()
             busyWorksAdapter = BusyWorksAdapter(requireContext(),item)
             withContext(Dispatchers.Main){
                 binding.busyWorksRecyclerview.adapter = busyWorksAdapter

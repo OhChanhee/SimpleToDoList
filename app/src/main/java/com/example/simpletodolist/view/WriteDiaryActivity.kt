@@ -7,46 +7,33 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.simpletodolist.R
 import com.example.simpletodolist.database.AppDataBase
 import com.example.simpletodolist.database.DiaryItem
-import com.example.simpletodolist.databinding.ActivityItemaddBinding
+import com.example.simpletodolist.databinding.ActivityWriteDiaryBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
-class AddActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityItemaddBinding
+class WriteDiaryActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityWriteDiaryBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityItemaddBinding.inflate(layoutInflater)
+        binding = ActivityWriteDiaryBinding.inflate(layoutInflater)
 
         binding.buttonAdd.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
 
                 val item = DiaryItem(
-                    category = intent.getStringExtra("category").toString(),
+                    treeCategoryId = 0,
                     title = binding.editTextTitle.text.toString(),
                     content = binding.editTextContent.text.toString(),
-                    time = LocalDate.now().toString(),
-                    isEnd = false
+                    time = LocalDate.now().toString()
                 )
-                AppDataBase.getInstance(this@AddActivity)!!.memoItemDao().insertItem(item)
+                AppDataBase.getInstance(this@WriteDiaryActivity)!!.DiaryItemDao().insertItem(item)
                 finishActivity()
             }
         }
 
         setContentView(binding.root)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.add_action_bar, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.app_bar_back) {
-            finishActivity()
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun finishActivity() {
