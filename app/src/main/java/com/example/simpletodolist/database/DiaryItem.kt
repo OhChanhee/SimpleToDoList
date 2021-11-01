@@ -11,6 +11,7 @@ data class DiaryItem(
     var treeCategoryId:Int,
     var title:String,
     var content:String,
+    var day:String,
     var time:String,
 ):Parcelable
 

@@ -25,7 +25,7 @@ class ReadDiaryActivity : AppCompatActivity() {
 
         binding.buttonSave.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
-                val fixeditem = DiaryItem(
+                val fixedItem = DiaryItem(
                     id = item!!.id,
                     treeCategoryId = 0,
                     title = binding.editTextTitle.text.toString(),
@@ -33,7 +33,7 @@ class ReadDiaryActivity : AppCompatActivity() {
                     time = LocalDate.now().toString(),
                 )
 
-                AppDataBase.getInstance(this@ReadDiaryActivity)!!.DiaryItemDao().updateItem(fixeditem)
+                AppDataBase.getInstance(this@ReadDiaryActivity)!!.DiaryItemDao().updateItem(fixedItem)
                 finishActivity()
             }
         }

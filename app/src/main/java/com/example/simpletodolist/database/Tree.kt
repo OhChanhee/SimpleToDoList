@@ -10,5 +10,5 @@ import kotlinx.parcelize.Parcelize
 data class Tree(
     @PrimaryKey(autoGenerate = true) val treeId: Int = 0,
     var year: Int,
-    var month:Int,
+    var month:Int
 ): Parcelable

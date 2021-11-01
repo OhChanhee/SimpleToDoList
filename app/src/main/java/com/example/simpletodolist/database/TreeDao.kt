@@ -6,5 +6,13 @@ import androidx.room.*
 interface TreeDao {
     @Transaction
     @Query("SELECT * FROM TB_TREE")
-    fun getTrees(): List<Tree>
+    fun getTrees(): List<TreeWithDiaryData>
+
+    @Transaction
+    @Query("SELECT * FROM TB_TREE WHERE year = :year AND month = :month")
+    fun getCurTree(year:Int,month:Int) : TreeWithDiaryData
+
+    @Transaction
+    @Insert
+    fun insertTree(vararg tree:Tree)
 }
