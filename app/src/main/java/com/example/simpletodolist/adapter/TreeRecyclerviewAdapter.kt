@@ -32,4 +32,6 @@ class TreeRecyclerviewAdapter() : RecyclerView.Adapter<TreeRecyclerviewAdapter.V
             day.text = items[position].day
         }
     }
+
+
 }

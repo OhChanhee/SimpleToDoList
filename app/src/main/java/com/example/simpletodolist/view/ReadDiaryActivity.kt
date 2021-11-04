@@ -30,6 +30,7 @@ class ReadDiaryActivity : AppCompatActivity() {
                     treeCategoryId = 0,
                     title = binding.editTextTitle.text.toString(),
                     content = binding.editTextContent.text.toString(),
+                    day = LocalDate.now().dayOfMonth.toString(),
                     time = LocalDate.now().toString(),
                 )
 

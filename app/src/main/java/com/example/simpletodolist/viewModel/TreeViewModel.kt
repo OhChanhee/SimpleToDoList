@@ -1,7 +1,6 @@
 package com.example.simpletodolist.viewModel
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.simpletodolist.database.AppDataBase
@@ -18,16 +17,17 @@ class TreeViewModel : ViewModel() {
     var month: Int = 0
 
     val diaryData = MutableLiveData<List<DiaryItem>>()
+    //lateinit val curTree
 
     fun getDiaryData(context: Context) {
         CoroutineScope(Dispatchers.IO).launch {
             year = LocalDate.now().year
             month = LocalDate.now().monthValue
 
-            var getDiaryData = AppDataBase.getInstance(context)?.TreeDao()?.getCurTree(year, month)?.diaryItemList
+            var getDiaryData = AppDataBase.getInstance(context)?.TreeDao()?.getTargetTree(year, month)?.diaryItemList
 
             withContext(Dispatchers.Main) {
-                diaryData.value = getDiaryData!!
+                //diaryData.value = getDiaryData!!
             }
         }
 

@@ -4,23 +4,33 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.simpletodolist.adapter.TreeRecyclerviewAdapter
+import com.example.simpletodolist.database.AppDataBase
 import com.example.simpletodolist.database.DiaryItem
 import com.example.simpletodolist.databinding.ActivityTreeBinding
+import com.example.simpletodolist.util.RecyclerviewUtil
+import com.example.simpletodolist.util.RecyclerviewUtil.*
 import com.example.simpletodolist.viewModel.TreeViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.time.LocalDate
 
 class TreeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityTreeBinding
     private lateinit var recyclerviewAdapter: TreeRecyclerviewAdapter
 
-    private val viewModel : TreeViewModel by viewModels()
+    private val viewModel: TreeViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTreeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         recyclerviewAdapter = TreeRecyclerviewAdapter()
+        binding.diaryRecyclerview.layoutManager = GridLayoutManager(this,8)
+        //binding.diaryRecyclerview.addItemDecoration(HorizontalItemDecoration(8))
         binding.diaryRecyclerview.adapter = recyclerviewAdapter
 
         viewModel.getDiaryData(this)
@@ -28,13 +38,13 @@ class TreeActivity : AppCompatActivity() {
             recyclerviewAdapter.data = it.toMutableList()
         })
 
-        binding.treeBtn.setOnClickListener(){
+        binding.treeBtn.setOnClickListener() {
 
         }
-        binding.writeBtn.setOnClickListener(){
+        binding.writeBtn.setOnClickListener() {
 
         }
-        binding.settingBtn.setOnClickListener(){
+        binding.settingBtn.setOnClickListener() {
 
         }
 
