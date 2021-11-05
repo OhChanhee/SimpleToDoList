@@ -1,5 +1,6 @@
 package com.example.simpletodolist.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.simpletodolist.adapter.TreeRecyclerviewAdapter
 import com.example.simpletodolist.database.AppDataBase
 import com.example.simpletodolist.database.DiaryItem
+import com.example.simpletodolist.database.Tree
 import com.example.simpletodolist.databinding.ActivityTreeBinding
 import com.example.simpletodolist.util.RecyclerviewUtil
 import com.example.simpletodolist.util.RecyclerviewUtil.*
@@ -30,12 +32,16 @@ class TreeActivity : AppCompatActivity() {
 
         recyclerviewAdapter = TreeRecyclerviewAdapter()
         binding.diaryRecyclerview.layoutManager = GridLayoutManager(this,8)
-        //binding.diaryRecyclerview.addItemDecoration(HorizontalItemDecoration(8))
+        binding.diaryRecyclerview.addItemDecoration(HorizontalItemDecoration(8))
         binding.diaryRecyclerview.adapter = recyclerviewAdapter
 
+        viewModel.curTree = intent.getParcelableExtra<Tree>("TreeItem")
+
         viewModel.getDiaryData(this)
+
         viewModel.diaryData.observe(this, Observer {
             recyclerviewAdapter.data = it.toMutableList()
+            recyclerviewAdapter.notifyDataSetChanged()
         })
 
         binding.treeBtn.setOnClickListener() {
@@ -45,7 +51,8 @@ class TreeActivity : AppCompatActivity() {
 
         }
         binding.settingBtn.setOnClickListener() {
-
+            val intent = Intent(this,SettingActivity::class.java)
+            startActivity(intent)
         }
 
     }
