@@ -45,7 +45,8 @@ class TreeActivity : AppCompatActivity() {
         })
 
         binding.treeBtn.setOnClickListener() {
-
+            val intent = Intent(this,TreeListActivity::class.java)
+            startActivity(intent)
         }
         binding.writeBtn.setOnClickListener() {
 
