@@ -35,7 +35,7 @@ class TreeActivity : AppCompatActivity() {
         binding.diaryRecyclerview.addItemDecoration(HorizontalItemDecoration(8))
         binding.diaryRecyclerview.adapter = recyclerviewAdapter
 
-        viewModel.curTree = intent.getParcelableExtra<Tree>("TreeItem")
+        viewModel.curTree = intent.getParcelableExtra("TreeItem")
 
         viewModel.getDiaryData(this)
 
@@ -49,7 +49,8 @@ class TreeActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.writeBtn.setOnClickListener() {
-
+            val intent = Intent(this,TreeListActivity::class.java)
+            startActivity(intent)
         }
         binding.settingBtn.setOnClickListener() {
             val intent = Intent(this,SettingActivity::class.java)

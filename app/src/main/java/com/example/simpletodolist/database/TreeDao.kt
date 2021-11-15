@@ -13,6 +13,10 @@ interface TreeDao {
     fun getTargetTree(year:Int, month:Int) : TreeWithDiaryData?
 
     @Transaction
+    @Query("SELECT * FROM TB_TREE WHERE year = :year")
+    fun getYearTrees(year:Int) : List<TreeWithDiaryData>
+
+    @Transaction
     @Insert
     fun insertTree(vararg tree:Tree)
 }

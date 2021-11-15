@@ -27,9 +27,13 @@ class TreeViewModel : ViewModel() {
                 var year = LocalDate.now().year
                 var month = LocalDate.now().monthValue
 
-                val newTree = Tree(year=year,month =month)
-                AppDataBase.getInstance(context)?.TreeDao()?.insertTree(newTree)
                 curTree = AppDataBase.getInstance(context)?.TreeDao()?.getTargetTree(year,month)?.tree
+                if(curTree == null)
+                {
+                    val newTree = Tree(year=year,month =month)
+                    AppDataBase.getInstance(context)?.TreeDao()?.insertTree(newTree)
+                    curTree = AppDataBase.getInstance(context)?.TreeDao()?.getTargetTree(year,month)?.tree
+                }
             }
 
             var getDiaryData = AppDataBase.getInstance(context)?.TreeDao()
