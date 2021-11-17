@@ -1,11 +1,14 @@
 package com.example.simpletodolist.view
 
+import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.simpletodolist.R
 import com.example.simpletodolist.adapter.TreeListRecyclerviewAdapter
 import com.example.simpletodolist.adapter.TreeRecyclerviewAdapter
@@ -26,7 +29,10 @@ class TreeListActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         recyclerviewAdapter = TreeListRecyclerviewAdapter()
+        binding.rvTreeList.adapter = recyclerviewAdapter
+        binding.rvTreeList.addItemDecoration(VerticalSpaceItemDecoration(20))
         binding.rvTreeList.layoutManager = LinearLayoutManager(this)
+
         viewModel.getTreeData(this)
 
         viewModel.treeData.observe(this, Observer {
@@ -38,13 +44,22 @@ class TreeListActivity : AppCompatActivity() {
             viewModel.getTreeData(this)
         })
 
-        binding.plusYearBtn.setOnClickListener()
-        {
-            viewModel.plusCurYear()
+        binding.plusYearBtn.setOnClickListener{
+            viewModel.plusCurYear(binding.treeYearTv.text.toString().toInt() + 1)
         }
-        binding.minusYearBtn.setOnClickListener()
-        {
-            viewModel.minusCurYear()
+        binding.minusYearBtn.setOnClickListener{
+            viewModel.minusCurYear(binding.treeYearTv.text.toString().toInt() - 1)
+        }
+    }
+
+    inner class VerticalSpaceItemDecoration(private val verticalSpaceHeight: Int) :
+        RecyclerView.ItemDecoration() {
+
+        override fun getItemOffsets(
+            outRect: Rect, view: View, parent: RecyclerView,
+            state: RecyclerView.State
+        ) {
+            outRect.top = verticalSpaceHeight
         }
     }
 }

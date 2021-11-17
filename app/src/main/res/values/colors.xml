@@ -7,4 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="jan_item">#FFFFFFFF</color>
+    <color name="mar_item">#FFFFFFFF</color>
+    <color name="apr_item">#FFFFFFFF</color>
+    <color name="may_item">#FFFFFFFF</color>
+    <color name="jun_item">#FFFFFFFF</color>
+    <color name="jul_item">#FFFFFFFF</color>
+    <color name="aug_item">#FFFFFFFF</color>
+    <color name="sep_item">#FFFFFFFF</color>
+    <color name="oct_item">#FFFFFFFF</color>
+    <color name="nov_item">#FFFFFFFF</color>
+    <color name="nec_item">#FFFFFFFF</color>
 </resources>

@@ -19,20 +19,20 @@ class TreeListViewModel : ViewModel() {
     fun getTreeData(context: Context)
     {
         CoroutineScope(Dispatchers.IO).launch {
-            var getTreeData = AppDataBase.getInstance(context)?.TreeDao()?.getYearTrees(curYear.value!!)
+            val getTreeData = AppDataBase.getInstance(context)?.TreeDao()?.getYearTrees(curYear.value!!)
 
             withContext(Dispatchers.Main) {
                 treeData.value = getTreeData!!
             }
         }
     }
-    fun plusCurYear()
+    fun plusCurYear(value : Int)
     {
-        //if(curYear.value!! < LocalDate.now().year) //현재년도보다 작을시
-        curYear.value?.plus(1)
+        //if(value < LocalDate.now().year) //현재년도보다 작을시
+        curYear.value = value
     }
-    fun minusCurYear()
+    fun minusCurYear(value : Int)
     {
-        curYear.value?.minus(1)
+        curYear.value = value
     }
 }
