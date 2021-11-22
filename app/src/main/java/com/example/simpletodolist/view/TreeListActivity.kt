@@ -1,21 +1,14 @@
 package com.example.simpletodolist.view
 
-import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.simpletodolist.R
 import com.example.simpletodolist.adapter.TreeListRecyclerviewAdapter
-import com.example.simpletodolist.adapter.TreeRecyclerviewAdapter
-import com.example.simpletodolist.databinding.ActivityTreeBinding
 import com.example.simpletodolist.databinding.ActivityTreeListBinding
+import com.example.simpletodolist.util.VerticalSpaceItemDecoration
 import com.example.simpletodolist.viewModel.TreeListViewModel
-import com.example.simpletodolist.viewModel.TreeViewModel
 
 class TreeListActivity : AppCompatActivity() {
 
@@ -28,7 +21,7 @@ class TreeListActivity : AppCompatActivity() {
         binding = ActivityTreeListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        recyclerviewAdapter = TreeListRecyclerviewAdapter()
+        recyclerviewAdapter = TreeListRecyclerviewAdapter(this)
         binding.rvTreeList.adapter = recyclerviewAdapter
         binding.rvTreeList.addItemDecoration(VerticalSpaceItemDecoration(20))
         binding.rvTreeList.layoutManager = LinearLayoutManager(this)
@@ -52,14 +45,4 @@ class TreeListActivity : AppCompatActivity() {
         }
     }
 
-    inner class VerticalSpaceItemDecoration(private val verticalSpaceHeight: Int) :
-        RecyclerView.ItemDecoration() {
-
-        override fun getItemOffsets(
-            outRect: Rect, view: View, parent: RecyclerView,
-            state: RecyclerView.State
-        ) {
-            outRect.top = verticalSpaceHeight
-        }
-    }
 }

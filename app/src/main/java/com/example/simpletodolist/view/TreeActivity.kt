@@ -37,6 +37,7 @@ class TreeActivity : AppCompatActivity() {
 
         viewModel.curTree = intent.getParcelableExtra("TreeItem")
 
+
         viewModel.getDiaryData(this)
 
         viewModel.diaryData.observe(this, Observer {

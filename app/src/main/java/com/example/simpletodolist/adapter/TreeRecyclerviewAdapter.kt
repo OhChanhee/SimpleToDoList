@@ -25,7 +25,7 @@ class TreeRecyclerviewAdapter() : RecyclerView.Adapter<TreeRecyclerviewAdapter.V
         return data.size
     }
 
-    class ViewHolder(view:View):RecyclerView.ViewHolder(view){
+    inner class ViewHolder(view:View):RecyclerView.ViewHolder(view){
         private val day :TextView = itemView.findViewById(R.id.diaryItem_text)
 
         fun bind(position: Int,items:List<DiaryItem>){
