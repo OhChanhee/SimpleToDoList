@@ -10,7 +10,7 @@ interface TreeDao {
 
     @Transaction
     @Query("SELECT * FROM TB_TREE WHERE year = :year AND month = :month")
-    fun getTargetTree(year:Int, month:Int) : TreeWithDiaryData?
+    fun getTargetTree(year:Int?, month:Int?) : TreeWithDiaryData?
 
     @Transaction
     @Query("SELECT * FROM TB_TREE WHERE year = :year")

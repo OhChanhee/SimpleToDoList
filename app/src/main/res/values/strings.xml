@@ -7,4 +7,16 @@
     <string name="tv_content">Content</string>
     <string name="bt_add">ADD</string>
     <string name="bt_delete">DELETE</string>
+    <string name="short_january">Jan</string>
+    <string name="short_february">Feb</string>
+    <string name="short_march">Mar</string>
+    <string name="short_april">Apr</string>
+    <string name="short_may">May</string>
+    <string name="short_june">Jun</string>
+    <string name="short_july">Jul</string>
+    <string name="short_august">Aug</string>
+    <string name="short_september">Sep</string>
+    <string name="short_october">Oct</string>
+    <string name="short_november">Nov</string>
+    <string name="short_december">Dec</string>
 </resources>
