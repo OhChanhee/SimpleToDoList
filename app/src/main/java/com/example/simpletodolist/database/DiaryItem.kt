@@ -12,6 +12,7 @@ data class DiaryItem(
     var title:String,
     var content:String,
     var day:String,
+    var month:Int,
     var time:String,
 ):Parcelable
 

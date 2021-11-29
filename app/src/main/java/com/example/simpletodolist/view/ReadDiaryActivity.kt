@@ -28,38 +28,22 @@ class ReadDiaryActivity : AppCompatActivity() {
                 val fixedItem = DiaryItem(
                     id = item!!.id,
                     treeCategoryId = 0,
-                    title = binding.editTextTitle.text.toString(),
-                    content = binding.editTextContent.text.toString(),
+                    title = binding.diaryTitleTv.text.toString(),
+                    content = binding.diaryContentTv.text.toString(),
                     day = LocalDate.now().dayOfMonth.toString(),
+                    month = item.month,
                     time = LocalDate.now().toString(),
                 )
 
                 AppDataBase.getInstance(this@ReadDiaryActivity)!!.DiaryItemDao().updateItem(fixedItem)
-                finishActivity()
             }
         }
-        binding.buttonDelete.setOnClickListener {
+        binding.deleteBtn.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 AppDataBase.getInstance(this@ReadDiaryActivity)!!.DiaryItemDao().deleteItem(item!!)
-                finishActivity()
             }
         }
         setContentView(binding.root)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.add_action_bar, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.app_bar_back) {
-            finishActivity()
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun finishActivity() {
-        finish()
-    }
 }

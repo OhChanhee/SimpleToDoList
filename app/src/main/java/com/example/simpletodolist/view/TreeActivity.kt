@@ -44,7 +44,7 @@ class TreeActivity : AppCompatActivity() {
         viewModel.curTree.observe(this, Observer {
             binding.yearText.text = it?.year.toString()
 
-            when (it?.month) {
+            when (it?.month) {//수정해야할듯?
                 12, 1, 2 -> binding.treeActivityIv.setImageResource(R.drawable.winter_background)
                 3, 4, 5 -> binding.treeActivityIv.setImageResource(R.drawable.spring_background)
                 6, 7, 8 -> binding.treeActivityIv.setImageResource(R.drawable.summer_background)

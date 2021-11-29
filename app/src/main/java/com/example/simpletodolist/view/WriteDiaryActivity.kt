@@ -19,25 +19,23 @@ class WriteDiaryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityWriteDiaryBinding.inflate(layoutInflater)
 
-        binding.buttonAdd.setOnClickListener {
+        binding.checkBtn.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
 
                 val item = DiaryItem(
                     treeCategoryId = 0,
-                    title = binding.editTextTitle.text.toString(),
-                    content = binding.editTextContent.text.toString(),
+                    title = binding.diaryTitleEt.text.toString(),
+                    content = binding.diaryContentEt.text.toString(),
                     day = LocalDate.now().dayOfMonth.toString(),
+                    month = LocalDate.now().month.value,
                     time = LocalDate.now().toString()
                 )
-                AppDataBase.getInstance(this@WriteDiaryActivity)!!.DiaryItemDao().insertItem(item)
-                finishActivity()
+                AppDataBase.getInstance(this@WriteDiaryActivity)?.DiaryItemDao()?.insertItem(item)
+                finish()
             }
         }
 
         setContentView(binding.root)
     }
 
-    private fun finishActivity() {
-        finish()
-    }
 }

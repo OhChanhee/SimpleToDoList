@@ -7,8 +7,10 @@ import androidx.room.RoomDatabase
 
 @Database(entities = [DiaryItem::class,Tree::class],version = 1)
 abstract class AppDataBase : RoomDatabase(){
+
     abstract fun DiaryItemDao(): DiaryItemDao
     abstract fun TreeDao(): TreeDao
+
     companion object {
         private var instance : AppDataBase? = null
 
