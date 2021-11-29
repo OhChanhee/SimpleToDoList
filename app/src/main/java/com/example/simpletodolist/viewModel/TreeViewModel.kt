@@ -31,6 +31,8 @@ class TreeViewModel : ViewModel() {
                 val month = LocalDate.now().monthValue
 
                 getTreeData = AppDataBase.getInstance(context)?.TreeDao()?.getTargetTree(year,month)?.tree
+                getDiaryData = AppDataBase.getInstance(context)?.TreeDao()
+                    ?.getTargetTree(getTreeData?.year, getTreeData?.month)?.diaryItemList
                 if(getTreeData == null)
                 {
                     val newTree = Tree(year=year,month =month)

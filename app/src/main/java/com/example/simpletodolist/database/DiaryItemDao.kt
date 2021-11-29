@@ -10,6 +10,9 @@ interface DiaryItemDao {
     @Query("SELECT * FROM tb_diaryItem WHERE treeCategoryId = :category")
     fun getDiaryItems(category: Int):List<DiaryItem>
 
+    @Query("SELECT * FROM tb_diaryItem WHERE id = :id")
+    fun getTargetDiaryItem(id: Int) : DiaryItem
+
     @Query("SELECT COUNT(*) FROM tb_diaryItem")
     fun getItemCount():Int
 

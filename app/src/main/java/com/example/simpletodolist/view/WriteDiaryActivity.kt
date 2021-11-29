@@ -1,13 +1,14 @@
 package com.example.simpletodolist.view
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.simpletodolist.R
+import androidx.lifecycle.Observer
 import com.example.simpletodolist.database.AppDataBase
 import com.example.simpletodolist.database.DiaryItem
 import com.example.simpletodolist.databinding.ActivityWriteDiaryBinding
+import com.example.simpletodolist.viewModel.WriteDiaryViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,24 +16,30 @@ import java.time.LocalDate
 
 class WriteDiaryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWriteDiaryBinding
+
+    private val viewModel: WriteDiaryViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWriteDiaryBinding.inflate(layoutInflater)
 
-        binding.checkBtn.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
+        viewModel.getDiary(this)
 
-                val item = DiaryItem(
-                    treeCategoryId = 0,
-                    title = binding.diaryTitleEt.text.toString(),
-                    content = binding.diaryContentEt.text.toString(),
-                    day = LocalDate.now().dayOfMonth.toString(),
-                    month = LocalDate.now().month.value,
-                    time = LocalDate.now().toString()
-                )
-                AppDataBase.getInstance(this@WriteDiaryActivity)?.DiaryItemDao()?.insertItem(item)
-                finish()
-            }
+        viewModel.curDiary.observe(this, Observer {
+            binding.writeDiaryDateTv.text = it?.time
+            binding.diaryTitleEt.setText(it?.title)
+            binding.diaryContentEt.setText(it?.content)
+        })
+
+
+        val id = intent.getIntExtra("treeCategoryId",-1)
+        val title = binding.diaryTitleEt.text.toString()
+        val content = binding.diaryContentEt.text.toString()
+
+        binding.checkBtn.setOnClickListener{
+            viewModel.writeDiary(this,id,title,content)
+            val intent = Intent(this, TreeActivity::class.java)
+            startActivity(intent)
+            finishAffinity();
         }
 
         setContentView(binding.root)

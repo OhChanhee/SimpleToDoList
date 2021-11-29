@@ -78,6 +78,7 @@ class TreeActivity : AppCompatActivity() {
         }
         binding.writeBtn.setOnClickListener {
             val intent = Intent(this, WriteDiaryActivity::class.java)
+            intent.putExtra("treeCategoryId",viewModel.curTree.value?.treeId)
             startActivity(intent)
         }
         binding.settingBtn.setOnClickListener {
