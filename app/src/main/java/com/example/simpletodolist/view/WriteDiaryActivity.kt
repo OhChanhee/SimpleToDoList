@@ -39,7 +39,7 @@ class WriteDiaryActivity : AppCompatActivity() {
             viewModel.writeDiary(this,id,title,content)
             val intent = Intent(this, TreeActivity::class.java)
             startActivity(intent)
-            finishAffinity();
+            finishAffinity()
         }
 
         setContentView(binding.root)

@@ -1,6 +1,7 @@
 package com.example.simpletodolist.viewModel
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.simpletodolist.database.AppDataBase
@@ -15,25 +16,31 @@ class WriteDiaryViewModel : ViewModel() {
 
     val curDiary = MutableLiveData<DiaryItem?>()
 
-    fun getDiary(context: Context)
-    {
+    fun getDiary(context: Context) {
         var getDiaryData: DiaryItem? = null
         CoroutineScope(Dispatchers.IO).launch {
-            if(curDiary.value != null) {
+            if (curDiary.value != null) {
                 getDiaryData = AppDataBase.getInstance(context)?.DiaryItemDao()
                     ?.getTargetDiaryItem(curDiary.value?.id!!)
+            } else {
+                getDiaryData = DiaryItem(
+                    treeCategoryId = 0,
+                    title = "",
+                    content = "",
+                    day = LocalDate.now().dayOfMonth.toString(),
+                    month = LocalDate.now().month.value,
+                    time = LocalDate.now().year.toString() + "." + LocalDate.now().monthValue.toString() + "." + LocalDate.now().dayOfMonth.toString() + " " + LocalDate.now().dayOfWeek.toString()
+                        .substring(0, 3)
+                )
             }
             withContext(Dispatchers.Main) {
-                if(getDiaryData != null)
-                {
-                    curDiary.value = getDiaryData!!
-                }
+                curDiary.value = getDiaryData!!
             }
         }
+
     }
 
-    fun writeDiary(context: Context ,id:Int,title:String,content:String)
-    {
+    fun writeDiary(context: Context, id: Int, title: String, content: String) {
         CoroutineScope(Dispatchers.IO).launch {
             val diaryItem = DiaryItem(
                 treeCategoryId = id,
@@ -41,7 +48,8 @@ class WriteDiaryViewModel : ViewModel() {
                 content = content,
                 day = LocalDate.now().dayOfMonth.toString(),
                 month = LocalDate.now().month.value,
-                time = LocalDate.now().year.toString() + "." + LocalDate.now().month.toString() + "." + LocalDate.now().dayOfMonth.toString() +" "+  LocalDate.now().dayOfWeek.toString().split("day")[0]
+                time = LocalDate.now().year.toString() + "." + LocalDate.now().monthValue.toString() + "." + LocalDate.now().dayOfMonth.toString() + " " + LocalDate.now().dayOfWeek.toString()
+                    .substring(0, 3)
             )
             AppDataBase.getInstance(context)?.DiaryItemDao()?.insertItem(diaryItem)
         }
