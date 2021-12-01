@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.simpletodolist.database.AppDataBase
 import com.example.simpletodolist.database.DiaryItem
+import com.example.simpletodolist.util.SingleLiveEvent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,7 +17,7 @@ import java.time.LocalDate
 class WriteDiaryViewModel : ViewModel() {
 
     val curDiary = MutableLiveData<DiaryItem?>()
-    val writeStatus = MutableLiveData<Boolean>().apply { value = false }
+    val writeStatus = SingleLiveEvent<Void>()
 
     fun getDiary(context: Context,id: Int) {
         var getDiaryData: DiaryItem? = null
@@ -61,7 +62,7 @@ class WriteDiaryViewModel : ViewModel() {
                 Log.e("ddddd","작성끝!")
                 withContext(Dispatchers.Main) {
                     Toast.makeText(context, "일기를 작성했습니다!", Toast.LENGTH_SHORT).show()
-                    writeStatus.value = true
+                    writeStatus.call()
                 }
             }
             else //아이템을 수정할때
@@ -79,7 +80,7 @@ class WriteDiaryViewModel : ViewModel() {
                 ))
                 withContext(Dispatchers.Main) {
                     Toast.makeText(context, "일기를 수정했습니다!", Toast.LENGTH_SHORT).show()
-                    writeStatus.value = true
+                    writeStatus.call()
                 }
             }
 

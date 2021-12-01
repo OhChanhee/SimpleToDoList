@@ -35,10 +35,7 @@ class WriteDiaryActivity : AppCompatActivity() {
         })
 
         viewModel.writeStatus.observe(this, Observer {
-            if(it)
-            {
-                finish()
-            }
+            finish()
         })
 
         binding.checkBtn.setOnClickListener{

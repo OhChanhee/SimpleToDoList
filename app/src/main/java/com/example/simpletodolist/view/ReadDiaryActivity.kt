@@ -1,5 +1,7 @@
 package com.example.simpletodolist.view
 
+import android.app.Dialog
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +9,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import com.example.simpletodolist.R
 import com.example.simpletodolist.database.AppDataBase
@@ -39,8 +42,25 @@ class ReadDiaryActivity : AppCompatActivity() {
         })
 
         binding.deleteBtn.setOnClickListener {
-            viewModel.deleteDiary(this)
-            finish()
+            fun onClickDelete(){
+                viewModel.deleteDiary(this)
+                finish()
+            }
+            var onClickDeleteListener = object: DialogInterface.OnClickListener{
+                override fun onClick(dialog: DialogInterface?, which: Int) {
+                    when(which){
+                        DialogInterface.BUTTON_POSITIVE -> onClickDelete()
+                    }
+                }
+            }
+
+           AlertDialog.Builder(this)
+                .setTitle("삭제")
+                .setMessage("정말 일기를 삭제하실건가요..?")
+                .setPositiveButton("확인",onClickDeleteListener)
+                .setNegativeButton("취소",null)
+                .show()
+
         }
         binding.fixBtn.setOnClickListener{
             val intent = Intent(this, WriteDiaryActivity::class.java)
