@@ -60,8 +60,9 @@ class TreeActivity : AppCompatActivity() {
         })
 
         viewModel.diaryData.observe(this, Observer {
-            recyclerviewAdapter.data = it.toMutableList()
-            recyclerviewAdapter.notifyDataSetChanged()
+            Log.e("ddddd","리사이클러뷰: "+it.size)
+
+            recyclerviewAdapter.submitList(it)
         })
 
         binding.treeBtn.setOnClickListener {
@@ -70,7 +71,6 @@ class TreeActivity : AppCompatActivity() {
         }
         binding.writeBtn.setOnClickListener {
             val intent = Intent(this, WriteDiaryActivity::class.java)
-            //intent.putExtra("treeCategoryId",viewModel.curTree.value?.treeId) 트리액티비티에서 작성하는글은 현재의 트리에 나와야되기때문에 의미없음
             startActivity(intent)
         }
         binding.settingBtn.setOnClickListener {

@@ -1,6 +1,7 @@
 package com.example.simpletodolist.viewModel
 
 import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.simpletodolist.database.AppDataBase
@@ -27,6 +28,9 @@ class ReadDiaryViewModel : ViewModel() {
     fun deleteDiary(context: Context) {
         CoroutineScope(Dispatchers.IO).launch {
             AppDataBase.getInstance(context)?.DiaryItemDao()?.deleteItem(curDiary.value!!)
+            withContext(Dispatchers.Main) {
+                Toast.makeText(context, "일기를 삭제했습니다...", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

@@ -2,6 +2,7 @@ package com.example.simpletodolist.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -33,11 +34,24 @@ class WriteDiaryActivity : AppCompatActivity() {
             binding.diaryContentEt.setText(it?.content)
         })
 
+        viewModel.writeStatus.observe(this, Observer {
+            if(it)
+            {
+                finish()
+            }
+        })
+
         binding.checkBtn.setOnClickListener{
             title = binding.diaryTitleEt.text.toString()
             content = binding.diaryContentEt.text.toString()
-            viewModel.writeDiary(this,id,title,content)
-            finish()
+            if(title.isBlank()||content.isBlank())
+            {
+                Toast.makeText(this, "일기가 비어있어요...", Toast.LENGTH_SHORT).show()
+            }
+            else
+            {
+                viewModel.writeDiary(this,id,title,content)
+            }
         }
 
         setContentView(binding.root)

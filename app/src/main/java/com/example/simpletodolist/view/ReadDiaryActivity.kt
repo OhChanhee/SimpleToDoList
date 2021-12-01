@@ -24,11 +24,12 @@ class ReadDiaryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReadDiaryBinding
 
     private val viewModel: ReadDiaryViewModel by viewModels()
+    private lateinit var item : DiaryItem
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityReadDiaryBinding.inflate(layoutInflater)
 
-        val item = intent.getParcelableExtra<DiaryItem>("DiaryItem")
+        item = intent.getParcelableExtra<DiaryItem>("DiaryItem")!!
         viewModel.getDiary(this, item!!.id)
 
         viewModel.curDiary.observe(this, Observer {
@@ -51,7 +52,7 @@ class ReadDiaryActivity : AppCompatActivity() {
 
     override fun onRestart() {
         super.onRestart()
-        //viewModel.getDiary(this, item!!.id)
+        viewModel.getDiary(this, item!!.id)
 
     }
 

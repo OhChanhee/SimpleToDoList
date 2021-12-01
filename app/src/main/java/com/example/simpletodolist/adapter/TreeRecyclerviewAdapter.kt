@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.simpletodolist.R
 import com.example.simpletodolist.database.DiaryItem
+import com.example.simpletodolist.util.DiffCallback
 import com.example.simpletodolist.view.ReadDiaryActivity
-import com.example.simpletodolist.view.TreeActivity
 
-class TreeRecyclerviewAdapter(private val context: Context) : RecyclerView.Adapter<TreeRecyclerviewAdapter.ViewHolder>() {
-    var data = mutableListOf<DiaryItem>()
+class TreeRecyclerviewAdapter(private val context: Context) : ListAdapter<DiaryItem, TreeRecyclerviewAdapter.ViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.diary_item,parent,false)
@@ -23,19 +23,15 @@ class TreeRecyclerviewAdapter(private val context: Context) : RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(position,data)
-    }
-
-    override fun getItemCount(): Int {
-        return data.size
+        holder.bind(getItem(position))
     }
 
     inner class ViewHolder(view:View):RecyclerView.ViewHolder(view){
         private val day :TextView = itemView.findViewById(R.id.diaryItem_text)
         private val item_bg :ImageView = itemView.findViewById(R.id.diaryItem_Img)
-        fun bind(position: Int,items:List<DiaryItem>){
-            day.text = items[position].day
-            when(items[position].month)
+        fun bind(item:DiaryItem){
+            day.text = item.day
+            when(item.month)
             {
                 1 -> item_bg.setImageResource(R.drawable.item_winter)
                 2 -> item_bg.setImageResource(R.drawable.item_winter)
@@ -52,7 +48,7 @@ class TreeRecyclerviewAdapter(private val context: Context) : RecyclerView.Adapt
             }
             item_bg.setOnClickListener {
                 val intent = Intent(context, ReadDiaryActivity::class.java)
-                intent.putExtra("DiaryItem", items[position])
+                intent.putExtra("DiaryItem",item)
                 context.startActivity(intent)
             }
         }
