@@ -16,13 +16,14 @@ class WriteDiaryViewModel : ViewModel() {
 
     val curDiary = MutableLiveData<DiaryItem?>()
 
-    fun getDiary(context: Context) {
+    fun getDiary(context: Context,id: Int) {
         var getDiaryData: DiaryItem? = null
         CoroutineScope(Dispatchers.IO).launch {
-            if (curDiary.value != null) {
+            if(id != -1) {
                 getDiaryData = AppDataBase.getInstance(context)?.DiaryItemDao()
-                    ?.getTargetDiaryItem(curDiary.value?.id!!)
-            } else {
+                    ?.getTargetDiaryItem(id)
+            }
+            else {
                 getDiaryData = DiaryItem(
                     treeCategoryId = 0,
                     title = "",
@@ -42,16 +43,35 @@ class WriteDiaryViewModel : ViewModel() {
 
     fun writeDiary(context: Context, id: Int, title: String, content: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val diaryItem = DiaryItem(
-                treeCategoryId = id,
-                title = title,
-                content = content,
-                day = LocalDate.now().dayOfMonth.toString(),
-                month = LocalDate.now().month.value,
-                time = LocalDate.now().year.toString() + "." + LocalDate.now().monthValue.toString() + "." + LocalDate.now().dayOfMonth.toString() + " " + LocalDate.now().dayOfWeek.toString()
-                    .substring(0, 3)
-            )
-            AppDataBase.getInstance(context)?.DiaryItemDao()?.insertItem(diaryItem)
+            val itemid: Int
+            if(id == -1)//메인에서 글을썼을때
+            {
+                itemid = AppDataBase.getInstance(context)?.TreeDao()?.getTargetTree(LocalDate.now().year,LocalDate.now().monthValue)?.tree?.treeId!!
+                AppDataBase.getInstance(context)?.DiaryItemDao()?.insertItem(DiaryItem(
+                    treeCategoryId = itemid,
+                    title = title,
+                    content = content,
+                    day = LocalDate.now().dayOfMonth.toString(),
+                    month = LocalDate.now().month.value,
+                    time = LocalDate.now().year.toString() + "." + LocalDate.now().monthValue.toString() + "." + LocalDate.now().dayOfMonth.toString() + " " + LocalDate.now().dayOfWeek.toString()
+                        .substring(0, 3)
+                ))
+            }
+            else //아이템을 수정할때
+            {
+                itemid = id
+                val fixItem = AppDataBase.getInstance(context)?.DiaryItemDao()?.getTargetDiaryItem(itemid)
+                AppDataBase.getInstance(context)?.DiaryItemDao()?.updateItem(DiaryItem(
+                    id = itemid,
+                    treeCategoryId = fixItem!!.treeCategoryId,
+                    title = title,
+                    content = content,
+                    day = fixItem.day,
+                    month = fixItem.month,
+                    time = fixItem.time
+                ))
+            }
+
         }
     }
 

@@ -21,8 +21,11 @@ class WriteDiaryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWriteDiaryBinding.inflate(layoutInflater)
+        val id = intent.getIntExtra("treeCategoryId",-1)
+        var title : String
+        var content : String
 
-        viewModel.getDiary(this)
+        viewModel.getDiary(this,id)
 
         viewModel.curDiary.observe(this, Observer {
             binding.writeDiaryDateTv.text = it?.time
@@ -30,16 +33,11 @@ class WriteDiaryActivity : AppCompatActivity() {
             binding.diaryContentEt.setText(it?.content)
         })
 
-
-        val id = intent.getIntExtra("treeCategoryId",-1)
-        val title = binding.diaryTitleEt.text.toString()
-        val content = binding.diaryContentEt.text.toString()
-
         binding.checkBtn.setOnClickListener{
+            title = binding.diaryTitleEt.text.toString()
+            content = binding.diaryContentEt.text.toString()
             viewModel.writeDiary(this,id,title,content)
-            val intent = Intent(this, TreeActivity::class.java)
-            startActivity(intent)
-            finishAffinity()
+            finish()
         }
 
         setContentView(binding.root)

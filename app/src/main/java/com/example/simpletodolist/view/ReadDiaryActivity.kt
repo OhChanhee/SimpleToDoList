@@ -1,14 +1,18 @@
 package com.example.simpletodolist.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import com.example.simpletodolist.R
 import com.example.simpletodolist.database.AppDataBase
 import com.example.simpletodolist.database.DiaryItem
 import com.example.simpletodolist.databinding.ActivityReadDiaryBinding
+import com.example.simpletodolist.viewModel.ReadDiaryViewModel
 import com.example.simpletodolist.viewModel.TreeListViewModel
 import com.example.simpletodolist.viewModel.WriteDiaryViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -19,36 +23,36 @@ import java.time.LocalDate
 class ReadDiaryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReadDiaryBinding
 
-    private val viewModel: WriteDiaryViewModel by viewModels()
+    private val viewModel: ReadDiaryViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityReadDiaryBinding.inflate(layoutInflater)
 
-        val item = intent.getParcelableExtra<DiaryItem>("item")
-        //binding.editTextTitle.setText(item?.title)
-        //binding.editTextContent.setText(item?.content)
+        val item = intent.getParcelableExtra<DiaryItem>("DiaryItem")
+        viewModel.getDiary(this, item!!.id)
 
-//        binding.buttonSave.setOnClickListener {
-//            CoroutineScope(Dispatchers.IO).launch {
-//                val fixedItem = DiaryItem(
-//                    id = item!!.id,
-//                    treeCategoryId = 0,
-//                    title = binding.diaryTitleTv.text.toString(),
-//                    content = binding.diaryContentTv.text.toString(),
-//                    day = LocalDate.now().dayOfMonth.toString(),
-//                    month = item.month,
-//                    time = LocalDate.now().toString(),
-//                )
-//
-//                AppDataBase.getInstance(this@ReadDiaryActivity)!!.DiaryItemDao().updateItem(fixedItem)
-//            }
-//        }
+        viewModel.curDiary.observe(this, Observer {
+            binding.writeDiaryDateTv.text = it?.time
+            binding.diaryTitleTv.setText(it?.title)
+            binding.diaryContentTv.setText(it?.content)
+        })
+
         binding.deleteBtn.setOnClickListener {
-            CoroutineScope(Dispatchers.IO).launch {
-                AppDataBase.getInstance(this@ReadDiaryActivity)!!.DiaryItemDao().deleteItem(item!!)
-            }
+            viewModel.deleteDiary(this)
+            finish()
+        }
+        binding.fixBtn.setOnClickListener{
+            val intent = Intent(this, WriteDiaryActivity::class.java)
+            intent.putExtra("treeCategoryId",item.id)
+            startActivity(intent)
         }
         setContentView(binding.root)
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        //viewModel.getDiary(this, item!!.id)
+
     }
 
 }

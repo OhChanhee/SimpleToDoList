@@ -28,11 +28,12 @@ class TreeListViewModel : ViewModel() {
     }
     fun plusCurYear(value : Int)
     {
-        //if(value < LocalDate.now().year) //현재년도보다 작을시
+        if(value < LocalDate.now().year) //현재년도보다 작을시
         curYear.value = value
     }
     fun minusCurYear(value : Int)
     {
+        if(value > 2020)
         curYear.value = value
     }
 }

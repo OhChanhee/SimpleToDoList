@@ -1,5 +1,7 @@
 package com.example.simpletodolist.adapter
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,8 +10,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.simpletodolist.R
 import com.example.simpletodolist.database.DiaryItem
+import com.example.simpletodolist.view.ReadDiaryActivity
+import com.example.simpletodolist.view.TreeActivity
 
-class TreeRecyclerviewAdapter() : RecyclerView.Adapter<TreeRecyclerviewAdapter.ViewHolder>() {
+class TreeRecyclerviewAdapter(private val context: Context) : RecyclerView.Adapter<TreeRecyclerviewAdapter.ViewHolder>() {
     var data = mutableListOf<DiaryItem>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -45,6 +49,11 @@ class TreeRecyclerviewAdapter() : RecyclerView.Adapter<TreeRecyclerviewAdapter.V
                 10 -> item_bg.setImageResource(R.drawable.item_autumn)
                 11 -> item_bg.setImageResource(R.drawable.item_autumn)
                 12 -> item_bg.setImageResource(R.drawable.item_winter)
+            }
+            item_bg.setOnClickListener {
+                val intent = Intent(context, ReadDiaryActivity::class.java)
+                intent.putExtra("DiaryItem", items[position])
+                context.startActivity(intent)
             }
         }
     }

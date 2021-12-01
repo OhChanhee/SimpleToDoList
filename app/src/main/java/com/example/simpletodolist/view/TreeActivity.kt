@@ -1,6 +1,5 @@
 package com.example.simpletodolist.view
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,17 +9,10 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.simpletodolist.R
 import com.example.simpletodolist.adapter.TreeRecyclerviewAdapter
-import com.example.simpletodolist.database.AppDataBase
-import com.example.simpletodolist.database.DiaryItem
-import com.example.simpletodolist.database.Tree
 import com.example.simpletodolist.databinding.ActivityTreeBinding
-import com.example.simpletodolist.util.RecyclerviewUtil
 import com.example.simpletodolist.util.RecyclerviewUtil.*
 import com.example.simpletodolist.viewModel.TreeViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.time.LocalDate
+
 
 class TreeActivity : AppCompatActivity() {
 
@@ -33,7 +25,7 @@ class TreeActivity : AppCompatActivity() {
         binding = ActivityTreeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        recyclerviewAdapter = TreeRecyclerviewAdapter()
+        recyclerviewAdapter = TreeRecyclerviewAdapter(this)
         binding.diaryRecyclerview.layoutManager = GridLayoutManager(this, 8)
         binding.diaryRecyclerview.addItemDecoration(HorizontalItemDecoration(8))
         binding.diaryRecyclerview.adapter = recyclerviewAdapter
@@ -78,12 +70,17 @@ class TreeActivity : AppCompatActivity() {
         }
         binding.writeBtn.setOnClickListener {
             val intent = Intent(this, WriteDiaryActivity::class.java)
-            intent.putExtra("treeCategoryId",viewModel.curTree.value?.treeId)
+            //intent.putExtra("treeCategoryId",viewModel.curTree.value?.treeId) 트리액티비티에서 작성하는글은 현재의 트리에 나와야되기때문에 의미없음
             startActivity(intent)
         }
         binding.settingBtn.setOnClickListener {
             val intent = Intent(this, SettingActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        viewModel.getDiaryData(this)
     }
 }
