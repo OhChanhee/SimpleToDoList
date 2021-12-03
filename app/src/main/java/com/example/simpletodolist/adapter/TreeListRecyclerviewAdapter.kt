@@ -2,18 +2,15 @@ package com.example.simpletodolist.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.simpletodolist.R
 import com.example.simpletodolist.database.TreeWithDiaryData
 import com.example.simpletodolist.view.TreeActivity
-import com.example.simpletodolist.view.TreeListActivity
 
 class TreeListRecyclerviewAdapter(private val context: Context) : RecyclerView.Adapter<TreeListRecyclerviewAdapter.ViewHolder>(){
     var data = mutableListOf<TreeWithDiaryData>()
@@ -50,7 +47,7 @@ class TreeListRecyclerviewAdapter(private val context: Context) : RecyclerView.A
                 8 -> btn.setImageResource(R.drawable.tree_item_august)
                 9 -> btn.setImageResource(R.drawable.tree_item_september)
                 10 -> btn.setImageResource(R.drawable.tree_item_october)
-                11 -> btn.setImageResource(R.drawable.tree_item_nobember)
+                11 -> btn.setImageResource(R.drawable.tree_item_november)
                 12 -> btn.setImageResource(R.drawable.tree_item_december)
             }
             btn.setOnClickListener {

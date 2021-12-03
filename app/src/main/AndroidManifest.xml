@@ -6,6 +6,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="내일 지구가 멸망해도 일기 정돈 괜찮잖아"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
@@ -17,11 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.LoginActivity">
-            android:screenOrientation="portrait"
+        <activity
+            android:name=".view.LoginActivity"
+            android:screenOrientation="portrait">
+
         </activity>
-        <activity android:name=".view.TreeListActivity" >
-            android:screenOrientation="portrait"
+        <activity
+            android:name=".view.TreeListActivity"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".view.SettingActivity"

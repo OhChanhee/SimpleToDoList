@@ -13,7 +13,6 @@
             android:layout_height="96dp"
             android:background="@drawable/round_btn"
             android:scaleType="centerCrop"
-            android:src="@drawable/spring_tree_item_bg"
             android:layout_marginHorizontal="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
