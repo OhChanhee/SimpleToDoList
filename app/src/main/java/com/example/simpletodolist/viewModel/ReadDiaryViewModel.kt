@@ -15,7 +15,7 @@ class ReadDiaryViewModel : ViewModel() {
     val curDiary = MutableLiveData<DiaryItem?>()
 
     fun getDiary(context: Context,id: Int) {
-        var getDiaryData: DiaryItem? = null
+        var getDiaryData: DiaryItem?
         CoroutineScope(Dispatchers.IO).launch {
             getDiaryData = AppDataBase.getInstance(context)?.DiaryItemDao()?.getTargetDiaryItem(id)
 
@@ -27,7 +27,7 @@ class ReadDiaryViewModel : ViewModel() {
 
     fun deleteDiary(context: Context) {
         CoroutineScope(Dispatchers.IO).launch {
-            AppDataBase.getInstance(context)?.DiaryItemDao()?.deleteItem(curDiary.value!!)
+            AppDataBase.getInstance(context)?.DiaryItemDao()?.deleteItemFromID(curDiary.value!!.id)
             withContext(Dispatchers.Main) {
                 Toast.makeText(context, "일기를 삭제했습니다...", Toast.LENGTH_SHORT).show()
             }

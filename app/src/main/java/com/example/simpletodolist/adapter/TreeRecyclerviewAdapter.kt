@@ -11,10 +11,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.simpletodolist.R
 import com.example.simpletodolist.database.DiaryItem
-import com.example.simpletodolist.util.DiffCallback
+import com.example.simpletodolist.database.MiniDiaryItem
+import com.example.simpletodolist.util.DiaryItemDiffCallback
 import com.example.simpletodolist.view.ReadDiaryActivity
 
-class TreeRecyclerviewAdapter(private val context: Context) : ListAdapter<DiaryItem, TreeRecyclerviewAdapter.ViewHolder>(DiffCallback) {
+class TreeRecyclerviewAdapter(private val context: Context) : ListAdapter<MiniDiaryItem, TreeRecyclerviewAdapter.ViewHolder>(DiaryItemDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.diary_item,parent,false)
@@ -29,7 +30,7 @@ class TreeRecyclerviewAdapter(private val context: Context) : ListAdapter<DiaryI
     inner class ViewHolder(view:View):RecyclerView.ViewHolder(view){
         private val day :TextView = itemView.findViewById(R.id.diaryItem_text)
         private val item_bg :ImageView = itemView.findViewById(R.id.diaryItem_Img)
-        fun bind(item:DiaryItem){
+        fun bind(item:MiniDiaryItem){
             day.text = item.day
             when(item.month)
             {
@@ -48,7 +49,7 @@ class TreeRecyclerviewAdapter(private val context: Context) : ListAdapter<DiaryI
             }
             item_bg.setOnClickListener {
                 val intent = Intent(context, ReadDiaryActivity::class.java)
-                intent.putExtra("DiaryItem",item)
+                intent.putExtra("itemId",item.miniDiaryItemId)
                 context.startActivity(intent)
             }
         }

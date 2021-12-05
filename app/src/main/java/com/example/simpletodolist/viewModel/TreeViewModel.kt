@@ -4,10 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.simpletodolist.database.AppDataBase
-import com.example.simpletodolist.database.DiaryItem
-import com.example.simpletodolist.database.Tree
-import com.example.simpletodolist.database.TreeWithDiaryData
+import com.example.simpletodolist.database.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,13 +14,13 @@ import java.time.Year
 
 class TreeViewModel : ViewModel() {
 
-    val diaryData = MutableLiveData<List<DiaryItem>>()
+    val diaryData = MutableLiveData<List<MiniDiaryItem>>()
     var curTree = MutableLiveData<Tree?>()
 
     fun getDiaryData(context: Context) {
         CoroutineScope(Dispatchers.IO).launch {
             var getTreeData : Tree? = null
-            var getDiaryData: List<DiaryItem>? = null
+            var getDiaryData: List<MiniDiaryItem>?
 
             if(curTree.value == null)//처음 실행했을때
             {
@@ -31,21 +28,20 @@ class TreeViewModel : ViewModel() {
                 val month = LocalDate.now().monthValue
 
                 getTreeData = AppDataBase.getInstance(context)?.TreeDao()?.getTargetTree(year,month)?.tree
-                getDiaryData = AppDataBase.getInstance(context)?.TreeDao()
-                    ?.getTargetTree(getTreeData?.year, getTreeData?.month)?.diaryItemList
+
+                getDiaryData = AppDataBase.getInstance(context)?.MiniDiaryItemDao()?.getMiniDiaryItems(getTreeData?.treeId)
+
                 if(getTreeData == null)
                 {
                     val newTree = Tree(year=year,month =month)
                     AppDataBase.getInstance(context)?.TreeDao()?.insertTree(newTree)
                     getTreeData = AppDataBase.getInstance(context)?.TreeDao()?.getTargetTree(year,month)?.tree
+                    getDiaryData = AppDataBase.getInstance(context)?.MiniDiaryItemDao()?.getMiniDiaryItems(getTreeData?.treeId)
 
-                    getDiaryData = AppDataBase.getInstance(context)?.TreeDao()
-                        ?.getTargetTree(getTreeData?.year, getTreeData?.month)?.diaryItemList
                 }
             }
-            else{
-                getDiaryData = AppDataBase.getInstance(context)?.TreeDao()
-                    ?.getTargetTree(curTree.value?.year, curTree.value?.month)?.diaryItemList
+            else{//처음시작이아닐때
+                getDiaryData = AppDataBase.getInstance(context)?.MiniDiaryItemDao()?.getMiniDiaryItems(curTree.value?.treeId)
             }
 
 

@@ -60,8 +60,6 @@ class TreeActivity : AppCompatActivity() {
         })
 
         viewModel.diaryData.observe(this, Observer {
-            Log.e("ddddd","리사이클러뷰: "+it.size)
-
             recyclerviewAdapter.submitList(it)
         })
 
