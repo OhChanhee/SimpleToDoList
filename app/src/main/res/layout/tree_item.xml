@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nanumggocnaeeum"
-            android:text="3월의 나무"
+            tools:text="3월의 나무"
             android:textColor="@color/black"
             android:textSize="48sp"
             app:layout_constraintBottom_toBottomOf="@+id/tree_item_ib"

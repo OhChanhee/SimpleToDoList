@@ -1,7 +1,6 @@
 package com.example.simpletodolist.viewModel
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.simpletodolist.database.AppDataBase

@@ -1,9 +1,7 @@
 package com.example.simpletodolist.adapter
 
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +31,6 @@ class ReadDiaryRecyclerviewAdapter :RecyclerView.Adapter<ReadDiaryRecyclerviewAd
         fun bind(position: Int,items:List<String>){
             val imageBytes = Base64.decode(items[position], Base64.DEFAULT)
             val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-            Log.e("ddddd", "decodingImage : $decodedImage")
             image.setImageBitmap(decodedImage)
         }
     }

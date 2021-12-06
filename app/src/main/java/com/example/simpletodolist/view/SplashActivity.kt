@@ -10,7 +10,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class SplashActivity : AppCompatActivity() {
-    private var delayTiem : Long = 1500
+    private var delayTime : Long = 1500
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
@@ -19,7 +19,7 @@ class SplashActivity : AppCompatActivity() {
 
     private fun loadSplashScreen(){
         CoroutineScope(Dispatchers.IO).launch {
-            delay(delayTiem)
+            delay(delayTime)
             val intent = Intent(applicationContext,TreeActivity::class.java)
             startActivity(intent)
             finish()

@@ -17,4 +17,24 @@ class RecyclerviewUtil {
             outRect.left = horizontalSpaceHeight
         }
     }
+
+    class RightSpaceItemDecoration(private val HorizonSpaceWidth: Int) : RecyclerView.ItemDecoration() {
+
+        override fun getItemOffsets(
+            outRect: Rect, view: View, parent: RecyclerView,
+            state: RecyclerView.State
+        ) {
+            outRect.right = HorizonSpaceWidth
+        }
+    }
+
+    class TopSpaceItemDecoration(private val verticalSpaceHeight: Int) : RecyclerView.ItemDecoration() {
+
+        override fun getItemOffsets(
+            outRect: Rect, view: View, parent: RecyclerView,
+            state: RecyclerView.State
+        ) {
+            outRect.top = verticalSpaceHeight
+        }
+    }
 }

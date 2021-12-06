@@ -1,6 +1,5 @@
 package com.example.simpletodolist.database
 
-import android.graphics.Bitmap
 import android.os.Parcelable
 import androidx.room.*
 import kotlinx.parcelize.Parcelize

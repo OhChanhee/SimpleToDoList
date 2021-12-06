@@ -3,11 +3,10 @@ package com.example.simpletodolist.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.simpletodolist.adapter.TreeListRecyclerviewAdapter
 import com.example.simpletodolist.databinding.ActivityTreeListBinding
-import com.example.simpletodolist.util.VerticalSpaceItemDecoration
+import com.example.simpletodolist.util.RecyclerviewUtil
 import com.example.simpletodolist.viewModel.TreeListViewModel
 
 class TreeListActivity : AppCompatActivity() {
@@ -23,16 +22,16 @@ class TreeListActivity : AppCompatActivity() {
 
         recyclerviewAdapter = TreeListRecyclerviewAdapter(this)
         binding.rvTreeList.adapter = recyclerviewAdapter
-        binding.rvTreeList.addItemDecoration(VerticalSpaceItemDecoration(20))
+        binding.rvTreeList.addItemDecoration(RecyclerviewUtil.TopSpaceItemDecoration(20))
         binding.rvTreeList.layoutManager = LinearLayoutManager(this)
 
         viewModel.getTreeData(this)
 
-        viewModel.treeData.observe(this, Observer {
+        viewModel.treeData.observe(this, {
             recyclerviewAdapter.data = it.toMutableList()
             recyclerviewAdapter.notifyDataSetChanged()
         })
-        viewModel.curYear.observe(this, Observer {
+        viewModel.curYear.observe(this, {
             binding.treeYearTv.text = it.toString()
             viewModel.getTreeData(this)
         })

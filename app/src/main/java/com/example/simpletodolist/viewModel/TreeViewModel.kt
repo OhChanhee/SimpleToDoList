@@ -1,7 +1,6 @@
 package com.example.simpletodolist.viewModel
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.simpletodolist.database.*
@@ -10,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.LocalDate
-import java.time.Year
+
 
 class TreeViewModel : ViewModel() {
 
@@ -43,7 +42,6 @@ class TreeViewModel : ViewModel() {
             else{//처음시작이아닐때
                 getDiaryData = AppDataBase.getInstance(context)?.MiniDiaryItemDao()?.getMiniDiaryItems(curTree.value?.treeId)
             }
-
 
             withContext(Dispatchers.Main) {
                 if(getDiaryData != null) {

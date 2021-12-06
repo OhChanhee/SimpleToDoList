@@ -1,7 +1,6 @@
 package com.example.simpletodolist.util
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.simpletodolist.database.DiaryItem
 import com.example.simpletodolist.database.MiniDiaryItem
 
 object DiaryItemDiffCallback : DiffUtil.ItemCallback<MiniDiaryItem>() {

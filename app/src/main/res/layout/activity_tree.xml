@@ -17,7 +17,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/spring_background" />
+            tools:srcCompat="@drawable/spring_background" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/year_text"
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
             android:fontFamily="@font/nanumggocnaeeum"
-            android:text="2021"
+            tools:text="2021"
             android:textColor="@color/black"
             android:textSize="48sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nanumggocnaeeum"
-            android:text="Oct"
+            tools:text="Oct"
             android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -49,8 +49,8 @@
             android:id="@+id/tree_btn"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_marginLeft="44dp"
-            android:layout_marginRight="88dp"
+            android:layout_marginStart="44dp"
+            android:layout_marginEnd="88dp"
             android:layout_marginBottom="12dp"
             android:background="@drawable/ic_icon_tree_linear"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -71,8 +71,8 @@
             android:id="@+id/setting_btn"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_marginLeft="88dp"
-            android:layout_marginRight="44dp"
+            android:layout_marginStart="88dp"
+            android:layout_marginEnd="44dp"
             android:layout_marginBottom="12dp"
             android:background="@drawable/ic_icon_setting_linear"
             app:layout_constraintBottom_toBottomOf="parent"

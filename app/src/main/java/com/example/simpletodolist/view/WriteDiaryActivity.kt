@@ -2,30 +2,23 @@ package com.example.simpletodolist.view
 
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.widget.LinearLayout
+import android.util.Base64
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.simpletodolist.adapter.TreeListRecyclerviewAdapter
 import com.example.simpletodolist.adapter.WriteDiaryRecyclerviewAdapter
-import com.example.simpletodolist.database.AppDataBase
-import com.example.simpletodolist.database.DiaryItem
 import com.example.simpletodolist.databinding.ActivityWriteDiaryBinding
-import com.example.simpletodolist.util.HorizontalSpaceItemDecoration
 import com.example.simpletodolist.util.LoadingDialog
+import com.example.simpletodolist.util.RecyclerviewUtil
 import com.example.simpletodolist.viewModel.WriteDiaryViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.time.LocalDate
 
 class WriteDiaryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWriteDiaryBinding
@@ -36,7 +29,7 @@ class WriteDiaryActivity : AppCompatActivity() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if(result.data != null)
             {
-                var bitmap : Bitmap
+                val bitmap : Bitmap
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                     val source = ImageDecoder.createSource(this.contentResolver, result.data?.data!!)
                     bitmap = ImageDecoder.decodeBitmap(source)
@@ -55,22 +48,25 @@ class WriteDiaryActivity : AppCompatActivity() {
 
         recyclerviewAdapter = WriteDiaryRecyclerviewAdapter()
         binding.diaryImageRecyclerview.adapter = recyclerviewAdapter
-        binding.diaryImageRecyclerview.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
-        binding.diaryImageRecyclerview.addItemDecoration(HorizontalSpaceItemDecoration(10))
+        binding.diaryImageRecyclerview.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
+        binding.diaryImageRecyclerview.addItemDecoration(RecyclerviewUtil.RightSpaceItemDecoration(10)
+        )
 
         val dialog = LoadingDialog(this)
 
-        val id = intent.getIntExtra("treeCategoryId",-1)
+        val id = intent.getIntExtra("itemId",-1)
         var title : String
         var content : String
         var imageList : List<Bitmap>
 
         viewModel.getDiary(this,id)
 
-        viewModel.curDiary.observe(this, Observer {
+        viewModel.curDiary.observe(this, {
             binding.writeDiaryDateTv.text = it?.time
             binding.diaryTitleEt.setText(it?.title)
             binding.diaryContentEt.setText(it?.content)
+            recyclerviewAdapter.data = stringListToBitMapList(it?.imageList!!)
+            recyclerviewAdapter.notifyDataSetChanged()
         })
 
         binding.checkBtn.setOnClickListener{
@@ -88,7 +84,7 @@ class WriteDiaryActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.writeStatus.observe(this, Observer {
+        viewModel.writeStatus.observe(this, {
             finish()
             dialog.dismiss()
         })
@@ -104,5 +100,16 @@ class WriteDiaryActivity : AppCompatActivity() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type ="image/*"
         getContent.launch(intent)
+    }
+    private fun stringListToBitMapList(stringList:List<String>) : MutableList<Bitmap> {
+        var imageBytes : ByteArray
+        var decodedImage : Bitmap
+        val resultList = mutableListOf<Bitmap>()
+        for (items in stringList){
+            imageBytes = Base64.decode(items, Base64.DEFAULT)
+            decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+            resultList.add(decodedImage)
+        }
+        return resultList
     }
 }
