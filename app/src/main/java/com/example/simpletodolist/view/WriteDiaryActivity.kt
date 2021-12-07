@@ -89,15 +89,19 @@ class WriteDiaryActivity : AppCompatActivity() {
             dialog.dismiss()
         })
         binding.addImageBtn.setOnClickListener{
+            if(recyclerviewAdapter.itemCount >= 5)
+            {
+                Toast.makeText(this, "사진은 5개까지만 넣을수있어요..!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             openGallery()
         }
-
 
         setContentView(binding.root)
     }
     private fun openGallery()
     {
-        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        val intent = Intent(Intent.ACTION_PICK)
         intent.type ="image/*"
         getContent.launch(intent)
     }

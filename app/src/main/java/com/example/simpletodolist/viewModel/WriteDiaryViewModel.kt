@@ -59,7 +59,12 @@ class WriteDiaryViewModel : ViewModel() {
                 var encodingString: String
                 var bitmap: Bitmap
                 for (bitmapItem in imageList) {
-                    bitmap = Bitmap.createScaledBitmap(bitmapItem, bitmapItem.width / 8, bitmapItem.height / 8, true)
+                    if(id == -1) {
+                        bitmap = Bitmap.createScaledBitmap(bitmapItem, bitmapItem.width / 8, bitmapItem.height / 8, true)
+                    }
+                    else{
+                        bitmap = bitmapItem
+                    }
                     bitmap.compress(Bitmap.CompressFormat.PNG, 10, baos)
                     bytes = baos.toByteArray()
                     encodingString = Base64.encodeToString(bytes, Base64.DEFAULT)
