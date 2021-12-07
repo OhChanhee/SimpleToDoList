@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        android:title="앱 설정">
+        <Preference
+            android:key="app_info"
+            android:title="앱정보"
+            android:fragment="com.example.simpletodolist.view.AppInfoFragment"
+            />
+        <Preference
+            android:key="font_license"
+            android:title="폰트 라이센스"
+            android:fragment="com.example.simpletodolist.view.FontLicenseFragment"
+            />
+    </PreferenceCategory>
+</PreferenceScreen>
